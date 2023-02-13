@@ -4,7 +4,7 @@ import sklearn as sk
 import xgboost as xgb
 
 def read_data(path1:str, path2:str) -> np.ndarray:
-    """ Read in crab dataset
+    """ Read in crab dataset and split into labels/features
     
     Args:
         path1(str): location of dataset 1
@@ -28,7 +28,7 @@ def read_data(path1:str, path2:str) -> np.ndarray:
     return labels, feats
 
 def train(train_data: np.ndarray, train_labels: np.ndarray) -> xgb.XGBClassifier:
-    """ Train binary classifier based on training features and labels
+    """ Train binary classifier on training features and labels
 
     Args:
         train_data (np.ndarray): numpy array with training features
@@ -36,6 +36,7 @@ def train(train_data: np.ndarray, train_labels: np.ndarray) -> xgb.XGBClassifier
 
     Returns:
         xgb.XGBClassifier: fitted model
+
     """
     model = xgb.XGBClassifier()
     model.fit(train_data, train_labels)
@@ -50,6 +51,7 @@ def predict(model: xgb.XGBClassifier, test_data: np.ndarray) -> np.ndarray:
 
     Returns:
         model_labels (np.ndarray): numpy array of predicted labels
+
     """
     model_labels = model.predict(test_data)
     return model_labels
@@ -63,6 +65,7 @@ def assess(model_labels: np.ndarray, test_labels: np.ndarray) -> tuple():
 
     Returns:
         tuple(): tuple containing floats: accuracy, precision, recall, and F1 score of model
+
     """
     true_all = np.where(model_labels==test_labels)[0]
     true_pos = np.where(test_labels[true_all]==0)[0]

@@ -5,7 +5,7 @@ import sklearn.model_selection as skms
 import sklearn.naive_bayes as NB
 
 def read_data(path1:str, path2:str) -> np.ndarray:
-    """ Read in crab dataset
+    """ Read in crab dataset and split into labels/features
     
     Args:
         path1(str): location of dataset 1
@@ -36,7 +36,8 @@ def train(train_data: np.ndarray, train_labels: np.ndarray) -> NB.GaussianNB:
         train_labels (np.ndarray): numpy array with training labels
 
     Returns:
-        xgb.XGBClassifier: fitted model
+        NB.GaussianNB: fitted model
+
     """
     model = NB.GaussianNB()
     model.fit(train_data, train_labels)
@@ -46,11 +47,12 @@ def predict(model: NB.GaussianNB, test_data: np.ndarray) -> np.ndarray:
     """ Predict labels from test data
 
     Args:
-        model (xgb.XGBClassifier): previously trained model
+        model (NB.GaussianNB): previously trained model
         test_data (np.ndarray): numpy array of test features
 
     Returns:
         model_labels (np.ndarray): numpy array of predicted labels
+
     """
     model_labels = model.predict(test_data)
     return model_labels
@@ -64,6 +66,7 @@ def assess(model_labels: np.ndarray, test_labels: np.ndarray) -> tuple():
 
     Returns:
         tuple(): tuple containing floats: accuracy, precision, recall, and F1 score of model
+        
     """
     true_all = np.where(model_labels==test_labels)[0]
     true_pos = np.where(test_labels[true_all]==0)[0]
