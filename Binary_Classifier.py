@@ -4,7 +4,7 @@ import sklearn as sk
 import xgboost as xgb
 
 def read_data(path1:str, path2:str) -> np.ndarray:
-    """ Read in crab dataset and split into labels/features
+    """ Read in crab dataset, combine datasets, and split into labels/features
     
     Args:
         path1(str): location of dataset 1

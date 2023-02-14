@@ -5,7 +5,7 @@ import sklearn.model_selection as skms
 import sklearn.naive_bayes as NB
 
 def read_data(path1:str, path2:str) -> np.ndarray:
-    """ Read in crab dataset and split into labels/features
+    """ Read in crab datasets, combine datasets, and split into labels/features
     
     Args:
         path1(str): location of dataset 1
@@ -29,7 +29,7 @@ def read_data(path1:str, path2:str) -> np.ndarray:
     return labels, feats
 
 def train(train_data: np.ndarray, train_labels: np.ndarray) -> NB.GaussianNB:
-    """ Train Naive-Bayes binary classifier based on training features and labels
+    """ Train Naive-Bayes binary classifier on training features and labels
 
     Args:
         train_data (np.ndarray): numpy array with training features
@@ -66,7 +66,7 @@ def assess(model_labels: np.ndarray, test_labels: np.ndarray) -> tuple():
 
     Returns:
         tuple(): tuple containing floats: accuracy, precision, recall, and F1 score of model
-        
+
     """
     true_all = np.where(model_labels==test_labels)[0]
     true_pos = np.where(test_labels[true_all]==0)[0]
